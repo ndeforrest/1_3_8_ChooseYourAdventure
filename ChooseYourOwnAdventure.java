@@ -1,4 +1,3 @@
-import java.lang.Math;
 import java.util.Scanner;
 
 public class ChooseYourOwnAdventure {
@@ -40,5 +39,27 @@ public class ChooseYourOwnAdventure {
         double nolanPunchChance = 0.60;
         double rohanAdvanceChance = 0.60;
         double nolanAdvanceChance = 0.30;
+
+        //START GAME
+        System.out.println("Would you like to spar?");
+        String start = scan.nextLine();
+        if (start.equalsIgnoreCase("yes")) {
+            System.out.println("Great! Get your sparring gear on!");
+        }
+        else {
+            System.out.println("Too bad! Sir Nick says \"Get your sparring gear on!\"");
+        }
+
+        System.out.println("Do you want a red or blue chestguard?");
+        String chestguardColor = scan.nextLine();
+        if (chestguardColor.equalsIgnoreCase("red")) {
+            System.out.println("Your name is Rohan. Here are your traits: \n" + rohanTraits);
+        }
+        else if (chestguardColor.equalsIgnoreCase("blue")) {
+            System.out.println("Your name is Nolan. Here are your traits: \n" + nolanTraits);
+        }
+        else {
+            System.out.println("\"No one in Kung Jung Mu Sul uses a " + chestguardColor + " colored chestguard. GET OUT!\" says Sir Nick. Bye!");
+        }
     }
 }
