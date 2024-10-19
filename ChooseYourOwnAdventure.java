@@ -57,57 +57,74 @@ public class ChooseYourOwnAdventure {
         String chestguardColor = scan.nextLine();
         if (chestguardColor.equalsIgnoreCase("red")) {
             System.out.println("Your name is Rohan. Here are your traits: \n" + rohanTraits);
-            rohan();
+            rohan(); // go to Rohan's start method
         } else if (chestguardColor.equalsIgnoreCase("blue")) {
             System.out.println("Your name is Nolan. Here are your traits: \n" + nolanTraits);
-            nolan();
+            nolan(); // go to Nolan's start method
         } else {
             System.out.println("No one in Kung Jung Mu Sul uses a " + chestguardColor
-                    + " colored chestguard. GET OUT! says Sir Nick. Bye!");
+                    + " colored chestguard. GET OUT! says Sir Nick. Bye!"); // End game if neither red nor blue is
+                                                                            // picked
         }
     }
 
     // WHEN YOU PLAY AS ROHAN
     public static void rohan() {
         System.out.println("Do you have your mouthguard in, Rohan?");
-        while (!((scan.nextLine()).equalsIgnoreCase("yes"))) {
+        while (!((scan.nextLine()).equalsIgnoreCase("yes"))) { // repeat until user inputs yes
             System.out.println(
                     "WRONG! Rohan always has his mouthguard in! Ill let you try again. Do you have your mouthguard in, Rohan?");
         }
         System.out.println("Ok, 3, 2, 1 *ding ding ding* SPAR!");
         System.out.println("Are you on your toes? 'yes' or 'no'");
+
         String statusToes = scan.nextLine();
-        if (statusToes.equalsIgnoreCase("no")) {
-            System.out.println(
-                    "ROHAN! Why aren't you on your toes? Nolan just kicked you in the chest and you fell over! YOU LOSE!");
-        } else {
+        // if user inputs yes to statusToes
+        if (statusToes.equalsIgnoreCase("yes")) {
             System.out.println("Good job, at least you're staying on your toes!");
             System.out.println(
                     "Now, what do you want to do? You are currently out of range. Options include 'nothing', 'advance', or 'stupid wild kick', or make your own move up.");
+
+            // user input for "what to do"?
             String firstMove = scan.nextLine();
-            while (!(firstMove.equalsIgnoreCase("stupid wild kick") || firstMove.equals("nothing")
+            // if user picks none of the three options
+            while (!(firstMove.equalsIgnoreCase("stupid wild kick") || firstMove.equalsIgnoreCase("nothing")
                     || firstMove.equals("advance"))) {
                 System.out.println("What kind of stupid idea is that? Thats dumb! Pick again.");
-                firstMove = scan.nextLine();
+                firstMove = scan.nextLine(); // get input again
             }
-            while (firstMove.equals("nothing")) {
+            // if the user inputs 'nothig' to "what to do?"
+            while (firstMove.equalsIgnoreCase("nothing")) {
                 double randomAdvanceChance = Math.random();
+                // if the random chance is greater than nolan's chance of advancing, nolan will
+                // advance
                 if (randomAdvanceChance >= nolanAdvanceChance) {
                     System.out.println("Heads up! Nolan moved in. You're now in range.");
                     firstMove = "not nothing"; // in order to exit while loop
                     range();
+                    // if random chance is less than nolan's chance of advanging, then no one
+                    // advanced
                 } else {
-                    System.out.println("BOTH OF YOU HAVE TO DO SOMETHING! Rohan, choose another option.");
+                    System.out.println(
+                            "NEITHER OF YOU DID ANYTHING? Lets go, we're here to spar, not make friends. Rohan, choose another option.");
                     firstMove = scan.nextLine();
                 }
             }
+            // if user inputs 'stupid wild kick' to "what to do?"
             if (firstMove.equalsIgnoreCase("stupid wild kick")) {
                 System.out.println("What was that! That was awful!");
-                wildKick();
-            } else if (firstMove.equalsIgnoreCase("advance")) {
+                wildKick(); // go to wild kick method
+            }
+            // if user inputs 'advance' to "what to do?"
+            else if (firstMove.equalsIgnoreCase("advance")) {
                 System.out.println("Great job! You moved in to range! Now what?");
                 range();
             }
+
+            // if user inputs 'no' to statusToes
+        } else {
+            System.out.println(
+                    "ROHAN! Why aren't you on your toes? Nolan just kicked you in the chest and you fell over! YOU LOSE!");
         }
 
     }
