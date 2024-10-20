@@ -56,10 +56,12 @@ public class ChooseYourOwnAdventure {
         System.out.println("Do you want a red or blue chestguard?");
         String chestguardColor = scan.nextLine();
         if (chestguardColor.equalsIgnoreCase("red")) {
-            System.out.println("Your name is Rohan. Here are your traits: \n" + rohanTraits);
+            System.out.println("Your name is Rohan. You are 6'1\" tall, and weigh 160 lbs. Here are your skills: \n"
+                    + rohanTraits);
             rohan(); // go to Rohan's start method
         } else if (chestguardColor.equalsIgnoreCase("blue")) {
-            System.out.println("Your name is Nolan. Here are your traits: \n" + nolanTraits);
+            System.out.println("Your name is Nolan. You are 5'6\" tall, and weigh 130 lbs. Here are your skills: \n"
+                    + nolanTraits);
             nolan(); // go to Nolan's start method
         } else {
             System.out.println("No one in Kung Jung Mu Sul uses a " + chestguardColor
@@ -106,7 +108,7 @@ public class ChooseYourOwnAdventure {
                     // advanced
                 } else {
                     System.out.println(
-                            "NEITHER OF YOU DID ANYTHING? Lets go, we're here to spar, not make friends. Rohan, choose another option.");
+                            "(Nolan did not move in)\nNEITHER OF YOU DID ANYTHING? Lets go, we're here to spar, not make friends. Rohan, choose another option.");
                     firstMove = scan.nextLine();
                 }
             }
@@ -121,8 +123,9 @@ public class ChooseYourOwnAdventure {
                 range();
             }
 
-            // if user inputs 'no' to statusToes
-        } else {
+        }
+        // if user inputs 'no' to statusToes
+        else {
             System.out.println(
                     "ROHAN! Why aren't you on your toes? Nolan just kicked you in the chest and you fell over! YOU LOSE!");
         }
@@ -131,7 +134,71 @@ public class ChooseYourOwnAdventure {
 
     // WHEN YOU PLAY AS NOLAN
     public static void nolan() {
-
+        System.out.println("Do you have your mouthguard in, Nolan?");
+        String mouthguardStatus = scan.nextLine();
+        // If user input for "do you have a mouthguard" is neither yes nor no, while
+        // loop until it is yes ot no
+        while (!(mouthguardStatus.equalsIgnoreCase("yes") || mouthguardStatus.equalsIgnoreCase("no"))) {
+            System.out.println("Nolan, I asked you a simple question! Answer it with a yes or no you imbicile.");
+            mouthguardStatus = scan.nextLine();
+        }
+        // if user input for "do you have a mouthguard" is no: end program
+        if (mouthguardStatus.equalsIgnoreCase("no")) {
+            System.out.println("NOLAN YOU IDIOT! I'VE TOLD YOU TOO MANY TIMES TO USE YOUR MOUTHGUARD. GET OUT!!");
+        }
+        // if user input for "do you have a mouthguard" is yes, continue program
+        else if (mouthguardStatus.equalsIgnoreCase("yes")) {
+            System.out.println("Finally, you brought your mouthguard. Maybe you're not as much of an idiot today.");
+            System.out.println("Ok, 3, 2, 1 *ding ding ding* SPAR!");
+            System.out.println("Now, are you on your toes? 'yes' or 'no'");
+            // User input for if on toes
+            String statusOnToes = scan.nextLine();
+            // if user does not input yes for "if on toes", while loop until yes
+            while (!statusOnToes.equalsIgnoreCase("yes")) {
+                System.out.println("FALSE! Nolan's always on his toes. Answer again.");
+                statusOnToes = scan.nextLine(); // to exit while loop
+            }
+            // if user inputs yes for "if on toes": continue with more program
+            if (statusOnToes.equalsIgnoreCase("yes")) {
+                System.out.println(
+                        "Ok, now let's fight! What do you want to do? You are currently out of range. Options include 'nothing', 'advance', or 'stupid wild kick', or make your own move up.");
+                // user input for "what to do"?
+                String firstMove = scan.nextLine();
+                // if user picks none of the three options
+                while (!(firstMove.equalsIgnoreCase("stupid wild kick") || firstMove.equalsIgnoreCase("nothing")
+                        || firstMove.equals("advance"))) {
+                    System.out.println("What kind of stupid idea is that? Thats dumb! Pick again.");
+                    firstMove = scan.nextLine(); // get input again
+                }
+                // if the user inputs 'nothig' to "what to do?"
+                while (firstMove.equalsIgnoreCase("nothing")) {
+                    double randomAdvanceChance = Math.random();
+                    // if the random chance is greater than rohan's chance of advancing, rohan
+                    // advances
+                    if (randomAdvanceChance >= rohanAdvanceChance) {
+                        System.out.println("Heads up! Rohan moved in. You're now in range.");
+                        firstMove = "not nothing"; // in order to exit while loop
+                        range();
+                        // if random chance is less than rohan's chance of advanging, then no one
+                        // advanced
+                    } else {
+                        System.out.println(
+                                "(Rohan did not move in)\nNEITHER OF YOU DID ANYTHING? Lets go, we're here to spar, not make friends. Nolan, choose another option.");
+                        firstMove = scan.nextLine();
+                    }
+                }
+                // if user inputs 'stupid wild kick' to "what to do?"
+                if (firstMove.equalsIgnoreCase("stupid wild kick")) {
+                    System.out.println("What was that! That was awful!");
+                    wildKick(); // go to wild kick method
+                }
+                // if user inputs 'advance' to "what to do?"
+                else if (firstMove.equalsIgnoreCase("advance")) {
+                    System.out.println("Great job! You moved in to range! Now what?");
+                    range();
+                }
+            }
+        }
     }
 
     public static void range() {
