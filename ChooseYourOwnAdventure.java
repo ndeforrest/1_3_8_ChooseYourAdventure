@@ -103,7 +103,7 @@ public class ChooseYourOwnAdventure {
                 if (randomAdvanceChance >= nolanAdvanceChance) {
                     System.out.println("Heads up! Nolan moved in. You're now in range.");
                     firstMove = "not nothing"; // in order to exit while loop
-                    range();
+                    rangeRohan();
                     // if random chance is less than nolan's chance of advanging, then no one
                     // advanced
                 } else {
@@ -115,12 +115,12 @@ public class ChooseYourOwnAdventure {
             // if user inputs 'stupid wild kick' to "what to do?"
             if (firstMove.equalsIgnoreCase("stupid wild kick")) {
                 System.out.println("What was that! That was awful!");
-                wildKick(); // go to wild kick method
+                wildKickRohan(); // go to wild kick method
             }
             // if user inputs 'advance' to "what to do?"
             else if (firstMove.equalsIgnoreCase("advance")) {
                 System.out.println("Great job! You moved in to range! Now what?");
-                range();
+                rangeRohan();
             }
 
         }
@@ -178,7 +178,7 @@ public class ChooseYourOwnAdventure {
                     if (randomAdvanceChance >= rohanAdvanceChance) {
                         System.out.println("Heads up! Rohan moved in. You're now in range.");
                         firstMove = "not nothing"; // in order to exit while loop
-                        range();
+                        rangeNolan();
                         // if random chance is less than rohan's chance of advanging, then no one
                         // advanced
                     } else {
@@ -190,30 +190,46 @@ public class ChooseYourOwnAdventure {
                 // if user inputs 'stupid wild kick' to "what to do?"
                 if (firstMove.equalsIgnoreCase("stupid wild kick")) {
                     System.out.println("What was that! That was awful!");
-                    wildKick(); // go to wild kick method
+                    wildKickNolan(); // go to wild kick method
                 }
                 // if user inputs 'advance' to "what to do?"
                 else if (firstMove.equalsIgnoreCase("advance")) {
                     System.out.println("Great job! You moved in to range! Now what?");
-                    range();
+                    rangeNolan();
                 }
             }
         }
     }
 
-    public static void range() {
+    public static void rangeRohan() {
 
     }
 
-    public static void punch() {
+    public static void punchRohan() {
 
     }
 
-    public static void wildKick() {
+    public static void wildKickRohan() {
 
     }
 
-    public static void wrestle() {
+    public static void wrestleRohan() {
+
+    }
+
+    public static void rangeNolan() {
+
+    }
+
+    public static void punchNolan() {
+
+    }
+
+    public static void wildKickNolan() {
+
+    }
+
+    public static void wrestleNolan() {
 
     }
 
