@@ -85,7 +85,7 @@ public class ChooseYourOwnAdventure {
         if (statusToes.equalsIgnoreCase("yes")) {
             System.out.println("Good job, at least you're staying on your toes!");
             System.out.println(
-                    "Now, what do you want to do? You are currently out of range. Options include 'nothing', 'advance', or 'stupid wild kick', or make your own move up.");
+                    "You are currently out of range. You can do 'nothing', 'advance', 'stupid wild kick', or make your own move up.");
 
             // user input for "what to do"?
             String firstMove = scan.nextLine();
@@ -161,7 +161,7 @@ public class ChooseYourOwnAdventure {
             // if user inputs yes for "if on toes": continue with more program
             if (statusOnToes.equalsIgnoreCase("yes")) {
                 System.out.println(
-                        "Ok, now let's fight! What do you want to do? You are currently out of range. Options include 'nothing', 'advance', or 'stupid wild kick', or make your own move up.");
+                        "Ok, now let's fight! What do you want to do? You could do 'nothing', 'advance', 'stupid wild kick', or make your own move up.");
                 // user input for "what to do"?
                 String firstMove = scan.nextLine();
                 // if user picks none of the three options
@@ -210,7 +210,24 @@ public class ChooseYourOwnAdventure {
     }
 
     public static void wildKickRohan() {
-
+        double catchChance = Math.random();
+        if (catchChance >= nolanCatch) {
+            System.out.println("You buffoon! Nolan caught the kick!");
+            double throwChance = Math.random();
+            if (throwChance >= nolanThrow) {
+                System.out.println(
+                        "And he threw you to the ground!! That's why you don't do stupid stuff like that, Rohan!");
+                System.out.println("YOU LOSE!!!");
+            } else {
+                System.out.println(
+                        "But you toughed it out, and didn't let Nolan throw you. Good job. Now break it up! Let's re-center back to in range.");
+                rangeRohan();
+            }
+        } else {
+            System.out.println(
+                    "You're lucky that Nolan didn't catch that. You would have been done. But now you're in punching range.");
+            punchRohan();
+        }
     }
 
     public static void wrestleRohan() {
@@ -226,7 +243,24 @@ public class ChooseYourOwnAdventure {
     }
 
     public static void wildKickNolan() {
-
+        double catchChance = Math.random();
+        if (catchChance >= rohanCatch) {
+            System.out.println("You idiot! Rohan caught the kick!");
+            double throwChance = Math.random();
+            if (throwChance >= rohanThrow) {
+                System.out.println(
+                        "And he threw you to the ground!! You have no chance in close combat with someone bigger than you like Rohan!");
+                System.out.println("YOU LOSE!!!");
+            } else {
+                System.out.println(
+                        "I don't know how, but you got out of Rohan catching your kick. Let's re-center back to in range.");
+                rangeNolan();
+            }
+        } else {
+            System.out.println(
+                    "At least Rohan didn't catch that. Still, don't be stupid. You're in punching range now, so let's see what you can do.");
+            punchNolan();
+        }
     }
 
     public static void wrestleNolan() {
