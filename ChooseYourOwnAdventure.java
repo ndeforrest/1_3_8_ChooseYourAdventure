@@ -100,7 +100,7 @@ public class ChooseYourOwnAdventure {
                 double randomAdvanceChance = Math.random();
                 // if the random chance is greater than nolan's chance of advancing, nolan will
                 // advance
-                if (randomAdvanceChance >= nolanAdvanceChance) {
+                if (randomAdvanceChance <= nolanAdvanceChance) {
                     System.out.println("Heads up! Nolan moved in. You're now in range.");
                     firstMove = "not nothing"; // in order to exit while loop
                     rangeRohan();
@@ -175,7 +175,7 @@ public class ChooseYourOwnAdventure {
                     double randomAdvanceChance = Math.random();
                     // if the random chance is greater than rohan's chance of advancing, rohan
                     // advances
-                    if (randomAdvanceChance >= rohanAdvanceChance) {
+                    if (randomAdvanceChance <= rohanAdvanceChance) {
                         System.out.println("Heads up! Rohan moved in. You're now in range.");
                         firstMove = "not nothing"; // in order to exit while loop
                         rangeNolan();
@@ -202,19 +202,112 @@ public class ChooseYourOwnAdventure {
     }
 
     public static void rangeRohan() {
-
+        System.out.println("Ok, you're in kicking range. What are you gonna do? 'advance', 'kick' or 'stay'");
+        String rangeInput = scan.nextLine();
+        while (!(rangeInput.equalsIgnoreCase("advance") || rangeInput.equalsIgnoreCase("kick") || rangeInput.equalsIgnoreCase("stay") || rangeInput.equalsIgnoreCase("nothing"))) {
+            System.out.println("What the heck was that!! Try again!");
+            rangeInput = scan.nextLine();
+        }
+        while (rangeInput.equalsIgnoreCase("stay") || rangeInput.equalsIgnoreCase("nothing")) {
+            double randomAdvanceChance = Math.random();
+            // if the random chance is less than nolan's chance of advancing, nolan will
+            // advance
+            if (randomAdvanceChance <= nolanAdvanceChance) {
+                System.out.println("Heads up! Nolan stepped in to the inside.");
+                rangeInput = "not nothing"; // in order to exit while loop
+                punchRohan();
+                // if random chance is greater than nolan's chance of advanging, then nolan didnt advanced
+            } else {
+                System.out.println(
+                        "(Nolan did not move in)\nCOME ON ROHAN YOU'RE IN RANGE. Let's goooo pick up the pace!");
+                rangeInput = scan.nextLine();
+            }
+        }
+        if (rangeInput.equalsIgnoreCase("advance")) {
+            System.out.println("Ok, that's a decision.");
+            punchRohan();
+        }
+        else if (rangeInput.equalsIgnoreCase("kick")) {
+            double oppChance = Math.random();
+            if (oppChance <= nolanKickChance) {
+                System.out.println("You're killing me! you both tried to kick at the same time and clashed shins. Oof! Now center up and keep going.");
+                rangeRohan();
+            }
+            else {
+                System.out.println("Which kick do you want to use? 'roundhouse', 'head spin' 'backside' 'front' or 'slide-up side'");
+                String kickChoice = scan.nextLine();
+                if(kickChoice.equalsIgnoreCase("roundhouse")){
+                    double chanceLand = Math.random();
+                    System.out.println("Pivot your front foot, rotate your hips and throw your back leg around. Lets see if you land it.");
+                    if(chanceLand <= rohanRoundhouseLand){
+                        System.out.println("Point: Rohan. Great kick, I taught you well. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("Oof, your technique sucks! You missed");
+                        punchRohan();
+                    }
+                }
+                else if(kickChoice.equalsIgnoreCase("head spin")){
+                    double chanceLand = Math.random();
+                    System.out.println("Rotate your hips halfway around. Make sure to look over your shoulder and spot your target. Try to hit eith the heel. Let's see if you can do it.");
+                    if(chanceLand <= rohanSpinkickLand){
+                        System.out.println("Point: Rohan. Great aim to the head, I taught you well. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("Oof, your technique sucks! You missed");
+                        punchRohan();
+                    }
+                }
+                else if(kickChoice.equalsIgnoreCase("backside")){
+                    double chanceLand = Math.random();
+                    System.out.println("Pivot your front foot halfway. While standing and turned, spot the target. Don't make this a spin kick. Now try it.");
+                    if(chanceLand <= rohanBackideLand){
+                        System.out.println("Point: Rohan. Great kick, super strong. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("Oof, your technique sucks! You missed");
+                        punchRohan();
+                    }
+                }
+                else if(kickChoice.equalsIgnoreCase("front")){
+                    double chanceLand = Math.random();
+                    System.out.println("Pivot your front foot, rotate your hips and throw your back leg around. Lets see if you land it.");
+                    if(chanceLand <= rohanFrontLand){
+                        System.out.println("Point: Rohan. Great kick, I'm the best teacher. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("You messed it up, somehow. You missed");
+                        punchRohan();
+                    }
+                }
+                else if(kickChoice.equalsIgnoreCase("slide-up side")){
+                    double chanceLand = Math.random();
+                    System.out.println("Bring your back foot to your front foot. Then, bring your front food up, and kick to the chest. Remember to pivot your foot.");
+                    if(chanceLand <= rohanSlideUpLand){
+                        System.out.println("Point: Rohan. Great kick, I taught you well. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("Oof, your technique sucks! You missed");
+                        punchRohan();
+                    }
+                }
+                else {
+                    System.out.println("You gotta stop making up dumb kicks like that. I'm done. You're acting just like Tino. GET OUT!");
+                }
+            }
+        }
     }
 
     public static void punchRohan() {
-
+    
     }
 
     public static void wildKickRohan() {
         double catchChance = Math.random();
-        if (catchChance >= nolanCatch) {
+        if (catchChance <= nolanCatch) {
             System.out.println("You buffoon! Nolan caught the kick!");
             double throwChance = Math.random();
-            if (throwChance >= nolanThrow) {
+            if (throwChance <= nolanThrow) {
                 System.out.println(
                         "And he threw you to the ground!! That's why you don't do stupid stuff like that, Rohan!");
                 System.out.println("YOU LOSE!!!");
@@ -235,7 +328,100 @@ public class ChooseYourOwnAdventure {
     }
 
     public static void rangeNolan() {
-
+        System.out.println("Ok, you're in kicking range. What are you gonna do? 'advance', 'kick' or 'stay'");
+        String rangeInput = scan.nextLine();
+        while (!(rangeInput.equalsIgnoreCase("advance") || rangeInput.equalsIgnoreCase("kick") || rangeInput.equalsIgnoreCase("stay") || rangeInput.equalsIgnoreCase("nothing"))) {
+            System.out.println("What was that, Nolan!! Try again!");
+            rangeInput = scan.nextLine();
+        }
+        while (rangeInput.equalsIgnoreCase("stay") || rangeInput.equalsIgnoreCase("nothing")) {
+            double randomAdvanceChance = Math.random();
+            // if the random chance is less than rohan's chance of advancing, rohan will
+            // advance
+            if (randomAdvanceChance <= rohanAdvanceChance) {
+                System.out.println("Heads up! Rohan stepped in to the inside.");
+                rangeInput = "not nothing"; // in order to exit while loop
+                punchNolan();
+                // if random chance is greater than nolan's chance of advanging, then nolan didnt advanced
+            } else {
+                System.out.println(
+                        "(Rohan did not move in)\nCOME ON NOLAN YOU'RE IN RANGE. Stop being lazy!");
+                rangeInput = scan.nextLine();
+            }
+        }
+        if (rangeInput.equalsIgnoreCase("advance")) {
+            System.out.println("Ok, that's a decision. Good luck trying to punch Rohan.");
+            punchNolan();
+        }
+        else if (rangeInput.equalsIgnoreCase("kick")) {
+            double oppChance = Math.random();
+            if (oppChance <= rohanKickChance) {
+                System.out.println("You're killing me! you both tried to kick at the same time and clashed shins. Dummys! Now center up and keep going.");
+                rangeNolan();
+            }
+            else {
+                System.out.println("Which kick do you want to use? 'roundhouse', 'head spin' 'backside' 'front' or 'slide-up side'");
+                String kickChoice = scan.nextLine();
+                if(kickChoice.equalsIgnoreCase("roundhouse")){
+                    double chanceLand = Math.random();
+                    System.out.println("Pivot your front foot, rotate your hips and throw your back leg around. Lets see if you land it.");
+                    if(chanceLand <= nolanRoundhouseLand){
+                        System.out.println("Point: Nolan. Great kick, I taught you well. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("Oof, your technique sucks! You missed");
+                        punchNolan();
+                    }
+                }
+                else if(kickChoice.equalsIgnoreCase("head spin")){
+                    double chanceLand = Math.random();
+                    System.out.println("Rotate your hips halfway around. Make sure to look over your shoulder and spot your target. Try to hit eith the heel. Let's see if you can do it.");
+                    if(chanceLand <= nolanSpinkickLand){
+                        System.out.println("Point: Nolan. Great aim to the head, I taught you well. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("Oof, your technique sucks! You missed");
+                        punchNolan();
+                    }
+                }
+                else if(kickChoice.equalsIgnoreCase("backside")){
+                    double chanceLand = Math.random();
+                    System.out.println("Pivot your front foot halfway. While standing and turned, spot the target. Don't make this a spin kick. Now try it.");
+                    if(chanceLand <= nolanBackideLand){
+                        System.out.println("Point: Nolan. Great kick, super strong. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("Oof, your technique sucks! You missed");
+                        punchNolan();
+                    }
+                }
+                else if(kickChoice.equalsIgnoreCase("front")){
+                    double chanceLand = Math.random();
+                    System.out.println("Pivot your front foot, rotate your hips and throw your back leg around. Lets see if you land it.");
+                    if(chanceLand <= nolanFrontLand){
+                        System.out.println("Point: Nolan. Great kick, I'm the best teacher. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("You messed it up, somehow. You missed");
+                        punchNolan();
+                    }
+                }
+                else if(kickChoice.equalsIgnoreCase("slide-up side")){
+                    double chanceLand = Math.random();
+                    System.out.println("Bring your back foot to your front foot. Then, bring your front food up, and kick to the chest. Remember to pivot your foot.");
+                    if(chanceLand <= nolanSlideUpLand){
+                        System.out.println("Point: Nolan. Great kick, I taught you well. YOU WIN!");
+                    }
+                    else{
+                        System.out.println("Oof, your technique sucks! You missed");
+                        punchNolan();
+                    }
+                }
+                else {
+                    System.out.println("You gotta stop making up dumb kicks like that. I'm done. You're acting just like Tino. GET OUT!");
+                }
+            }
+        }
     }
 
     public static void punchNolan() {
@@ -244,10 +430,10 @@ public class ChooseYourOwnAdventure {
 
     public static void wildKickNolan() {
         double catchChance = Math.random();
-        if (catchChance >= rohanCatch) {
+        if (catchChance <= rohanCatch) {
             System.out.println("You idiot! Rohan caught the kick!");
             double throwChance = Math.random();
-            if (throwChance >= rohanThrow) {
+            if (throwChance <= rohanThrow) {
                 System.out.println(
                         "And he threw you to the ground!! You have no chance in close combat with someone bigger than you like Rohan!");
                 System.out.println("YOU LOSE!!!");
