@@ -24,7 +24,7 @@ public class ChooseYourOwnAdventure {
     private static double nolanCrossLand = 0.85;
     private static double nolanHookLand = 0.60;
     private static double nolanCatch = 0.70;
-    private static double nolanThrow = 0.40;
+    private static double nolanThrow = 0.70;
 
     // Odds of attack
     private static double rohanKickChance = 0.60;
@@ -33,6 +33,8 @@ public class ChooseYourOwnAdventure {
     private static double nolanPunchChance = 0.60;
     private static double rohanAdvanceChance = 0.60;
     private static double nolanAdvanceChance = 0.30;
+    private static double nolanThrowChance = 0.30;
+    private static double rohanThrowChance = 0.80;
 
     private static Scanner scan = new Scanner(System.in);
 
@@ -305,9 +307,9 @@ public class ChooseYourOwnAdventure {
         System.out.println(
                 "Ok, you're in punching range. Keep it loose.\n What do you want to do: 'punch', nothing' 'advance' or 'block'");
         String statusPunch = scan.nextLine();
-        while (!(statusPunch.equalsIgnoreCase("punch") && statusPunch.equalsIgnoreCase("nothing")
-                && statusPunch.equalsIgnoreCase("stay") && statusPunch.equalsIgnoreCase("advance")
-                && statusPunch.equalsIgnoreCase("block"))) {
+        while (!(statusPunch.equalsIgnoreCase("punch") || statusPunch.equalsIgnoreCase("nothing")
+                || statusPunch.equalsIgnoreCase("stay") || statusPunch.equalsIgnoreCase("advance")
+                || statusPunch.equalsIgnoreCase("block"))) {
             System.out.println(
                     "What the heck was that? Nolan can punch your teeth out! So don't do dumb stuff like that. Try again.");
             statusPunch = scan.nextLine();
@@ -351,13 +353,14 @@ public class ChooseYourOwnAdventure {
                 System.out.println("You lost because neither you nor Nolan were smart enough to block");
                 lose();
             }
-            while (!(statusPunch.equalsIgnoreCase("jab") && statusPunch.equalsIgnoreCase("cross")
-                    && statusPunch.equalsIgnoreCase("hook"))) {
+            while (!(statusPunch.equalsIgnoreCase("jab") || statusPunch.equalsIgnoreCase("cross")
+                    || statusPunch.equalsIgnoreCase("hook"))) {
                 System.out.println(
                         "Rohan I swear, I've had enough of your stupidity. For the last time, stop making a fool of yourself! GET OUT!");
                 System.out.println("You lost by Sir Nick being mad at you because you're stupid");
-                lose();
                 System.out.println("You lost via Sir Nick");
+                lose();
+                statusPunch = "exit while loop";
             }
             if (statusPunch.equalsIgnoreCase("jab")) {
                 System.out.println(
@@ -430,7 +433,73 @@ public class ChooseYourOwnAdventure {
     }
 
     public static void wrestleRohan() {
-
+        System.out.println(
+                "Ok, you're all the way in to grappling range. You can either 'throw', 'back up' or do 'nothing'");
+        String wrestleChoice = scan.nextLine();
+        while (!(wrestleChoice.equalsIgnoreCase("throw") || wrestleChoice.equalsIgnoreCase("nothing")
+                || wrestleChoice.equalsIgnoreCase("stay") || wrestleChoice.equalsIgnoreCase("back up"))) {
+            System.out.println(
+                    "*sigh* I wish I wouldn't have such stupid students. Pick another move. There's only two options.");
+            wrestleChoice = scan.nextLine();
+        }
+        if (wrestleChoice.equalsIgnoreCase("throw")) {
+            if (Math.random() <= nolanThrowChance) {
+                System.out.println("(Nolan also tried to throw)\n");
+                double randomThrowNolan = Math.random();
+                double randomThrowRohan = Math.random();
+                if (randomThrowNolan <= nolanThrow && randomThrowRohan >= rohanThrow) {
+                    System.out.println("ROHAN! How in the world did you let Nolan beat you in wrestling?");
+                    System.out.println("You lost because Nolan was smarter while tripping you.");
+                    lose();
+                } else if (randomThrowNolan >= nolanThrow && randomThrowRohan <= rohanThrow) {
+                    System.out.println(
+                            "Good job Rohan! It would have been bad if you had lost that matchup. Good round.");
+                    win();
+                } else {
+                    System.out.println(
+                            "Break it up! You both tried to throw at the same time and got stuffed up. It's been a long match. Do you wanna 'continue' or 'rest'");
+                    String response = scan.nextLine();
+                    if (response.equalsIgnoreCase("relax")) {
+                        System.out.println(
+                                "Fine, I'll take pity on you. Great round, both of you. Now go rest up, and get ready for another round later.");
+                    } else {
+                        System.out.println(
+                                "That's what I like to hear! Now, you're gonna start in kicking range.\n3, 2, 1, GO!");
+                        rangeRohan();
+                    }
+                }
+            } else {
+                if (Math.random() <= rohanThrow) {
+                    System.out.println(
+                            "Good throw Rohan! Nolan didn't stand a chance. Way to use your strength. Great round!");
+                    win();
+                } else {
+                    System.out.println(
+                            "(You failed the throw)\nYou're killing me Rohan! You were so close to getting him! You're still in nthere, so don't give up.");
+                    wrestleRohan();
+                }
+            }
+        } else if (wrestleChoice.equalsIgnoreCase("stay") || wrestleChoice.equalsIgnoreCase("nothing")) {
+            if (Math.random() <= nolanThrowChance) {
+                System.out.println("(Nolan came in to throw)");
+                if (Math.random() <= nolanThrow) {
+                    System.out.println(
+                            "(And you did nothing)\nRohan! How did you let Nolan just walk up and take you down? Use your strength next time");
+                    System.out.println("You lost because you didn't try to fight Nolan when he took you down.");
+                    lose();
+                } else {
+                    System.out.println(
+                            "(But he failed)\nRohan, that was close man. You should not let Nolan in that close next time. Remember, you're still in close");
+                    wrestleRohan();
+                }
+            } else {
+                System.out.println("Stop hugging and throw the other person! Both of you! CMON!");
+                wrestleRohan();
+            }
+        } else if (wrestleChoice.equalsIgnoreCase("back up")) {
+            System.out.println("Alright, you backed out into punching range");
+            punchRohan();
+        }
     }
 
     public static void rangeNolan() {
@@ -537,9 +606,9 @@ public class ChooseYourOwnAdventure {
         System.out.println(
                 "Ok, you're in punching range. Keep it loose.\n What do you want to do: 'punch', nothing' 'advance' or 'block'");
         String statusPunch = scan.nextLine();
-        while (!(statusPunch.equalsIgnoreCase("punch") && statusPunch.equalsIgnoreCase("nothing")
-                && statusPunch.equalsIgnoreCase("stay") && statusPunch.equalsIgnoreCase("advance")
-                && statusPunch.equalsIgnoreCase("block"))) {
+        while (!(statusPunch.equalsIgnoreCase("punch") || statusPunch.equalsIgnoreCase("nothing")
+                || statusPunch.equalsIgnoreCase("stay") || statusPunch.equalsIgnoreCase("advance")
+                || statusPunch.equalsIgnoreCase("block"))) {
             System.out.println(
                     "What the heck was that? Rohan can punch your teeth out! So don't do dumb stuff like that. Try again.");
             statusPunch = scan.nextLine();
@@ -584,13 +653,14 @@ public class ChooseYourOwnAdventure {
                 System.out.println("You lost because neither you nor Rohan were smart enough to block");
                 lose();
             }
-            while (!(statusPunch.equalsIgnoreCase("jab") && statusPunch.equalsIgnoreCase("cross")
-                    && statusPunch.equalsIgnoreCase("hook"))) {
+            while (!(statusPunch.equalsIgnoreCase("jab") || statusPunch.equalsIgnoreCase("cross")
+                    || statusPunch.equalsIgnoreCase("hook"))) {
                 System.out.println(
                         "Nolan I swear, I've had enough of your stupidity. For the last time, stop making a fool of yourself! GET OUT!");
                 System.out.println("You lost by Sir Nick being mad at you because you're stupid");
                 lose();
                 System.out.println("You lost via Sir Nick");
+                statusPunch = "exit while loop";
             }
             if (statusPunch.equalsIgnoreCase("jab")) {
                 System.out.println(
@@ -663,7 +733,74 @@ public class ChooseYourOwnAdventure {
     }
 
     public static void wrestleNolan() {
-
+        System.out.println(
+                "Ok, you're all the way in to grappling range. You can either 'throw', 'back up' or do 'nothing'");
+        String wrestleChoice = scan.nextLine();
+        while (!(wrestleChoice.equalsIgnoreCase("throw") || wrestleChoice.equalsIgnoreCase("nothing")
+                || wrestleChoice.equalsIgnoreCase("stay") || wrestleChoice.equalsIgnoreCase("back up"))) {
+            System.out.println(
+                    "*sigh* I don't get paid enough for you idiots. Pick another move.");
+            wrestleChoice = scan.nextLine();
+        }
+        if (wrestleChoice.equalsIgnoreCase("throw")) {
+            if (Math.random() <= rohanThrowChance) {
+                System.out.println("(Rohan also tried to throw)\n");
+                double randomThrowRohan = Math.random();
+                double randomThrowNolan = Math.random();
+                if (randomThrowRohan <= rohanThrow && randomThrowNolan >= nolanThrow) {
+                    System.out.println(
+                            "Nolan, you can't beat Rohan in a close wrestle. You gotta stop trying or you'll be thrown to the ground like that again.");
+                    System.out.println("You lost because Rohan is a beast.");
+                    lose();
+                } else if (randomThrowNolan >= nolanThrow && randomThrowRohan <= rohanThrow) {
+                    System.out.println(
+                            "Great job Nolan! I'm surprised you could beat Rohan when you're both fighting for a throw. Good round.");
+                    win();
+                } else {
+                    System.out.println(
+                            "Break it up! You both tried to throw at the same time and got stuffed up. It's been a long match. Do you wanna 'continue' or 'rest'");
+                    String response = scan.nextLine();
+                    if (response.equalsIgnoreCase("relax")) {
+                        System.out.println(
+                                "Fine, I'll take pity on you. Great round, both of you. Now go rest up, and get ready for another round later.");
+                    } else {
+                        System.out.println(
+                                "That's what I like to hear! Now, you're gonna start in kicking range.\n3, 2, 1, GO!");
+                        rangeNolan();
+                    }
+                }
+            } else {
+                if (Math.random() <= nolanThrow) {
+                    System.out.println("Good throw Nolan! Way to use your technique, and trip Rohan up. Great round!");
+                    win();
+                } else {
+                    System.out.println(
+                            "(You failed the throw)\nGood try Nolan. Shake it off and try again. You're still in there, so don't give up.");
+                    wrestleNolan();
+                }
+            }
+        } else if (wrestleChoice.equalsIgnoreCase("stay") || wrestleChoice.equalsIgnoreCase("nothing")) {
+            if (Math.random() <= rohanThrowChance) {
+                System.out.println("(Rohan came in to throw)");
+                if (Math.random() <= rohanThrow) {
+                    System.out.println(
+                            "(And you did nothing)\nNolan! How did you let Rohan just walk up and take you down? Use your strength next time");
+                    System.out.println(
+                            "You lost because you didn't try to fight Rohan when he picked you up and threw you across the room, because he's a beast");
+                    lose();
+                } else {
+                    System.out.println(
+                            "(But he failed)\nNolan, that was close man. You should not let Rohan in that close next time. He's strong, so he can beat you easy. Remember, you're still in close");
+                    wrestleNolan();
+                }
+            } else {
+                System.out.println("Stop hugging and throw the other person! Both of you! CMON!");
+                wrestleNolan();
+            }
+        } else if (wrestleChoice.equalsIgnoreCase("back up")) {
+            System.out.println("Alright, you backed out into punching range");
+            punchNolan();
+        }
     }
 
     public static void lose() {
