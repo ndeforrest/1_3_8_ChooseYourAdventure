@@ -353,16 +353,16 @@ public class ChooseYourOwnAdventure {
                 System.out.println("You lost because neither you nor Nolan were smart enough to block");
                 lose();
             }
-            while (!(statusPunch.equalsIgnoreCase("jab") || statusPunch.equalsIgnoreCase("cross")
-                    || statusPunch.equalsIgnoreCase("hook"))) {
+            while (!(punchType.equalsIgnoreCase("jab") || punchType.equalsIgnoreCase("cross")
+                    || punchType.equalsIgnoreCase("hook"))) {
                 System.out.println(
                         "Rohan I swear, I've had enough of your stupidity. For the last time, stop making a fool of yourself! GET OUT!");
                 System.out.println("You lost by Sir Nick being mad at you because you're stupid");
                 System.out.println("You lost via Sir Nick");
                 lose();
-                statusPunch = "exit while loop";
+                punchType = "exit while loop";
             }
-            if (statusPunch.equalsIgnoreCase("jab")) {
+            if (punchType.equalsIgnoreCase("jab")) {
                 System.out.println(
                         "Ok, easiest punch. Your front arm goes straight out. Rotate a little bit. Don't swing to much, you're just trying to tag him.");
                 double landChance = Math.random();
@@ -377,7 +377,7 @@ public class ChooseYourOwnAdventure {
                 }
 
             }
-            if (statusPunch.equalsIgnoreCase("cross")) {
+            if (punchType.equalsIgnoreCase("cross")) {
                 System.out.println(
                         "Ok, medium punch. Bend your rear knee to rotate your back shoulder to the front. Bring your rear hand straigt out, and straight back. A little bit more power in this one");
                 double landChance = Math.random();
@@ -392,7 +392,7 @@ public class ChooseYourOwnAdventure {
                 }
 
             }
-            if (statusPunch.equalsIgnoreCase("hook")) {
+            if (punchType.equalsIgnoreCase("hook")) {
                 System.out.println(
                         "Ok, hardest punch. The biggest part is not over-rotating. You're gonna use the front hand. Remember to bring your elbow up, and keep your arm parallel to the ground as you punch.");
                 double landChance = Math.random();
@@ -653,16 +653,16 @@ public class ChooseYourOwnAdventure {
                 System.out.println("You lost because neither you nor Rohan were smart enough to block");
                 lose();
             }
-            while (!(statusPunch.equalsIgnoreCase("jab") || statusPunch.equalsIgnoreCase("cross")
-                    || statusPunch.equalsIgnoreCase("hook"))) {
+            while (!(punchType.equalsIgnoreCase("jab") || punchType.equalsIgnoreCase("cross")
+                    || punchType.equalsIgnoreCase("hook"))) {
                 System.out.println(
                         "Nolan I swear, I've had enough of your stupidity. For the last time, stop making a fool of yourself! GET OUT!");
                 System.out.println("You lost by Sir Nick being mad at you because you're stupid");
                 lose();
                 System.out.println("You lost via Sir Nick");
-                statusPunch = "exit while loop";
+                punchType = "exit while loop";
             }
-            if (statusPunch.equalsIgnoreCase("jab")) {
+            if (punchType.equalsIgnoreCase("jab")) {
                 System.out.println(
                         "Ok, easiest punch. Your front arm goes straight out. Rotate a little bit. Don't swing to much, you're just trying to tag him.");
                 double landChance = Math.random();
@@ -677,7 +677,7 @@ public class ChooseYourOwnAdventure {
                 }
 
             }
-            if (statusPunch.equalsIgnoreCase("cross")) {
+            if (punchType.equalsIgnoreCase("cross")) {
                 System.out.println(
                         "Ok, medium punch. Bend your rear knee to rotate your back shoulder to the front. Bring your rear hand straigt out, and straight back. A little bit more power in this one");
                 double landChance = Math.random();
@@ -692,7 +692,7 @@ public class ChooseYourOwnAdventure {
                 }
 
             }
-            if (statusPunch.equalsIgnoreCase("hook")) {
+            if (punchType.equalsIgnoreCase("hook")) {
                 System.out.println(
                         "Ok, hardest punch. The biggest part is not over-rotating. You're gonna use the front hand. Remember to bring your elbow up, and keep your arm parallel to the ground as you punch.");
                 double landChance = Math.random();
